@@ -9,7 +9,6 @@ const App = () => {
     alert('kkk')
   }
 
-  
   return (
     <C.Container>
       <C.InfoArea>

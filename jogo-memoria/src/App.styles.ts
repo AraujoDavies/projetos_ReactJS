@@ -15,7 +15,8 @@ export const Container = styled.div`
 export const InfoArea = styled.div`
     display: flex;
     flex-direction: column;
-
+    margin: auto;
+    
     @media (max-width:750px){
         text-align: center;
     }
