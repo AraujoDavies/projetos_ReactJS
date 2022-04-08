@@ -1,13 +1,45 @@
 import styled from "styled-components";
 
-export const Container = styled.div``;
+/* 1 */
+export const Container = styled.div`
+    width: 750px;
+    margin: auto;
+    padding: 50px 0;
+    display: flex;
 
-export const InfoArea = styled.div``;
+    @media (max-width:750px){
+        flex-direction: column;
+    }
+`;
+/* 2 */
+export const InfoArea = styled.div`
+    display: flex;
+    flex-direction: column;
 
-export const GridArea = styled.div``;
+    @media (max-width:750px){
+        text-align: center;
+    }
+`;
+/* 3 */
+export const Logo = styled.a`
+    display: block;
+`;
+export const Reiniciar = styled.button`
+    height: 50px;
+    @media (max-width:750px){
+        width: 200px;
+        margin: auto;
+        margin-bottom: 15px;
+    }
+`;
+/* 2 */
+export const GridArea = styled.div`
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
 
-export const Logo = styled.a``;
-
-export const InfoTimer = styled.div``;
-
-export const Reiniciar = styled.button``;
+    @media (max-width:750px){
+        margin: 0 10px;
+        justify-content: center;
+    }
+`;
