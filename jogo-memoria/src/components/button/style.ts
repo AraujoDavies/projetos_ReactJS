@@ -9,6 +9,10 @@ export const Container = styled.div`
     display: flex;
     opacity: 1;
     transition: all ease .3s;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+     user-select: none;
 
     &:hover {
         opacity: 0.8;
