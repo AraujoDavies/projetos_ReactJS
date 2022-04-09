@@ -8,6 +8,8 @@ import { Button } from './components/button';
 import { InfoItem } from './components/infoItem';
 // types
 import { GridItem } from './types/gridItemType';
+// dados
+import { items } from './data/items'
 
 const App = () => {
   const[playing, setPlaying] = useState<boolean>(false) //saber se o jogo foi iniciado
@@ -16,9 +18,35 @@ const App = () => {
   const[showCount, setShowCount] = useState<number>(0) //saber quantidade de itens que estão ativos
   const[gridItem, setGridItem] = useState<GridItem[]>([]) //saber oq acontece com as cartas 
 
+  const teste = () => {
+
+  }
+
   useEffect(()=>resetAndCreate(), []) //reset o game ao carregar site
   const resetAndCreate = () => {
+    // resetar informações
+    setTimer(0)
+    setMoveCount(0)
+    setShowCount(0)
+
+    //criar o GRID vazio
+    let tmpGrid: GridItem[] = []
+    for (let i = 0; i < (items.length * 2); i++) tmpGrid.push({item: null, show:false, permanentShow:false});
     
+    // jogar Informações no Grid
+    for (let w = 0; w < 2; w++){ //esse for roda duas vezes pq as cartas são exibidas duas vezes
+      for (let i = 0; i < items.length; i++){ //for que distribui as cartas
+        let pos = -1
+        while(pos < 0 || tmpGrid[pos].item !== null){
+          pos = Math.floor(Math.random()*(items.length*2))
+        }
+        tmpGrid[pos].item = i;
+      }
+    }
+    
+    // preencher o state
+    setGridItem(tmpGrid)
+    console.log(tmpGrid)
   }
 
   return (
