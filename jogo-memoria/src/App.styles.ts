@@ -44,3 +44,10 @@ export const GridArea = styled.div`
         justify-content: center;
     }
 `;
+/* 3 */
+export const Grid = styled.div`
+    width: 430px;
+    display: grid;
+    grid-columns: (4, 1fr);
+    gap: 10px;
+`
