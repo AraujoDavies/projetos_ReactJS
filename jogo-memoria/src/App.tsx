@@ -18,10 +18,6 @@ const App = () => {
   const[showCount, setShowCount] = useState<number>(0) //saber quantidade de itens que estão ativos
   const[gridItem, setGridItem] = useState<GridItem[]>([]) //saber oq acontece com as cartas 
 
-  const teste = () => {
-
-  }
-
   useEffect(()=>resetAndCreate(), []) //reset o game ao carregar site
   const resetAndCreate = () => {
     // resetar informações
@@ -46,7 +42,7 @@ const App = () => {
     
     // preencher o state
     setGridItem(tmpGrid)
-    console.log(tmpGrid)
+  
   }
 
   return (
