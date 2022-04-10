@@ -11,7 +11,8 @@ import { GridItem } from './components/gridItem';
 import { GridItemType } from './types/gridItemType';
 // dados
 import { items } from './data/items'
-
+//helpers
+import { formatMinutes } from './helpers/timerInMinutes';
 
 const App = () => {
   const[playing, setPlaying] = useState<boolean>(false) //saber se o jogo foi iniciado
@@ -21,11 +22,20 @@ const App = () => {
   const[gridItem, setGridItem] = useState<GridItemType[]>([]) //saber oq acontece com as cartas 
 
   useEffect(()=>resetAndCreate(), []) //reset o game ao carregar site
+
+  useEffect(()=>{
+    const tempoSec = setInterval(()=>{
+      setTimer(timer + 1);
+    },1000);
+    return () => clearInterval(tempoSec)
+  },[timer, playing]);
+
   const resetAndCreate = () => {
     // resetar informações
     setTimer(0)
     setMoveCount(0)
     setShowCount(0)
+    setPlaying(true)
 
     //criar o GRID vazio
     let tmpGrid: GridItemType[] = []
@@ -53,7 +63,7 @@ const App = () => {
     <C.Container>
       <C.InfoArea>
         <C.Logo> <img src={logoImg} width="200px" alt="" /></C.Logo>
-        <InfoItem label='Timer:' value='00:00'/>
+        <InfoItem label='Timer:' value={formatMinutes(timer)} />
         <InfoItem label='Movimentos:' value='0'/>
         <Button label='Reiniciar' icon={resetImg} onClick={resetAndCreate} />
       </C.InfoArea>
