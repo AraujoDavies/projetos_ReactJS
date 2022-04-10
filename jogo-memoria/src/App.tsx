@@ -21,16 +21,52 @@ const App = () => {
   const[showCount, setShowCount] = useState<number>(0) //saber quantidade de itens que estão ativos
   const[gridItem, setGridItem] = useState<GridItemType[]>([]) //saber oq acontece com as cartas 
 
-  useEffect(()=>resetAndCreate(), []) //reset o game ao carregar site
+  //começa o jogo ao carregar o site
+  useEffect(()=>resetAndCreate(), []) 
 
+  // minutos
   useEffect(()=>{
     const tempoSec = setInterval(()=>{
       setTimer(timer + 1);
     },1000);
     return () => clearInterval(tempoSec)
-  },[timer, playing]);
+  },[timer, playing]); 
 
-  const resetAndCreate = () => {
+  // verificar se os cartões virados são iguais
+  useEffect(()=>{
+    if(showCount === 2) {
+      let cardsAbertos = (gridItem.filter( item => item.show))
+      if (cardsAbertos.length == 2){
+        if (cardsAbertos[0].item == cardsAbertos[1].item){
+          let tmpGrid = [...gridItem];
+          for(let i in tmpGrid){
+            if (tmpGrid[i].show){
+              tmpGrid[i].show = false;
+              tmpGrid[i].permanentShow = true;
+            }
+          setGridItem(tmpGrid)
+          setShowCount(0)
+          }
+        } else {
+          setTimeout(()=>{
+            let tmpGrid = [...gridItem];
+            for (let i in tmpGrid){
+              if (tmpGrid[i].show){
+                tmpGrid[i].show = false
+              }
+            }
+            setGridItem(tmpGrid)
+            setShowCount(0)
+          }, 1000)
+        }
+        setMoveCount(moveCount => moveCount + 1)
+      }
+    }
+    console.log(gridItem)
+  },[gridItem, showCount])
+
+  // começa um novo jogo
+  const resetAndCreate = () => { 
     // resetar informações
     setTimer(0)
     setMoveCount(0)
@@ -53,10 +89,17 @@ const App = () => {
     }
     // preencher o state
     setGridItem(tmpGrid)
-  }
+  } 
 
   const clickCard = ( index: number) => {
-    
+    if(playing && gridItem[index] !== null && showCount < 2){
+      const tmpGrid = [...gridItem]
+        if (tmpGrid[index].permanentShow == false && tmpGrid[index].show == false){
+          tmpGrid[index].show = true
+          setShowCount(showCount + 1)
+        }
+      setGridItem(tmpGrid)
+    }
   }
 
   return (
@@ -64,7 +107,7 @@ const App = () => {
       <C.InfoArea>
         <C.Logo> <img src={logoImg} width="200px" alt="" /></C.Logo>
         <InfoItem label='Timer:' value={formatMinutes(timer)} />
-        <InfoItem label='Movimentos:' value='0'/>
+        <InfoItem label='Movimentos:' value={moveCount.toString()}/>
         <Button label='Reiniciar' icon={resetImg} onClick={resetAndCreate} />
       </C.InfoArea>
       <C.GridArea>

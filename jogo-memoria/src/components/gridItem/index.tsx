@@ -18,7 +18,7 @@ export const GridItem = ( {item, onClick}: Props) => { /* passei o item e o clic
             {!item.permanentShow && !item.show &&
                 <D.Icon src={b7} alt="" opacity={0.1}></D.Icon>
             }
-            {item.permanentShow && item.show && item.item != null &&
+            {item.permanentShow && !item.show && item.item != null &&
                 <D.Icon src={items[item.item].icon} alt="" ></D.Icon>
             }
             {item.show && !item.permanentShow && item.item !=null &&
