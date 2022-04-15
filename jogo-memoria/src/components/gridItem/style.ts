@@ -9,6 +9,7 @@ export const Container = styled.div<containerProp>`
     border-radius: 10px;
     cursor: pointer;
     display: flex;
+    height: 100px;
     justify-content: center;
     align-items: center;
     -webkit-user-select: none;
@@ -23,4 +24,6 @@ export const Icon = styled.img<Props>`
     width: 50px;
     height: 50px;
     opacity: ${props => props.opacity ?? 1}
+    
+    
 `
