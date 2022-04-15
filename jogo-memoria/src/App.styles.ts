@@ -40,7 +40,7 @@ export const GridArea = styled.div`
     justify-content: flex-end;
 
     @media (max-width:750px){
-        margin: 0 10px;
+        margin: 30px 10px;
         justify-content: center;
     }
 `;

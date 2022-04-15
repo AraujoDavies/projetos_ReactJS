@@ -27,7 +27,7 @@ const App = () => {
   // minutos
   useEffect(()=>{
     const tempoSec = setInterval(()=>{
-      setTimer(timer + 1);
+      if (playing) setTimer(timer + 1);
     },1000);
     return () => clearInterval(tempoSec)
   },[timer, playing]); 
@@ -62,8 +62,12 @@ const App = () => {
         setMoveCount(moveCount => moveCount + 1)
       }
     }
-    console.log(gridItem)
   },[gridItem, showCount])
+
+  //Finaliza o game
+  useEffect(()=>{
+    if (moveCount > 0 && gridItem.every(item=>item.permanentShow === true)) setPlaying(false)
+  }, [moveCount, gridItem])
 
   // começa um novo jogo
   const resetAndCreate = () => { 
