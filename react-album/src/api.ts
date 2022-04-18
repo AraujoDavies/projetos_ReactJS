@@ -6,5 +6,10 @@ export const Api = {
     getAllAlbuns: async () => {
         let response = await axios.get(`${baseURL}albums`); //faz a requisição
         return response.data; // retorna os dados
+    },
+
+    getAllPhotos: async () => {
+        let response = await axios.get(`${baseURL}photos`);
+        return response.data;
     }
 }
