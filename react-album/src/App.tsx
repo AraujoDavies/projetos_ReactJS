@@ -1,15 +1,14 @@
-//components
-import { AlbumItem } from "./components/albumItem";
-import { Thumbnails } from "./components/thumbnails";
-import { Routers } from "./rotas";
+import { Routes } from "./MainRoutes";
 
 export const App = () => {
   return(
-    <>
-      <h1 className="pl-2 py-3 font-black text-3xl">Galeria de Fotos</h1>
+    <div>
+      <h1 className="font-black text-3xl p-4">Galeria de Fotos</h1>
       <hr/>
-      <Routers />
-    </>
+      <section className="p-4">
+        <Routes />
+      </section>
+    </div>
   );
 }
 
