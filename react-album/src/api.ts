@@ -8,5 +8,13 @@ export const Api = {
     getAllAlbums: async () => {
         let response = await request('/albums');
         return response.data;
+    },
+    getAlbum: async (id: string) => {
+        let response = await request(`/albums/${id}`)
+        return response.data;
+    },
+    getAllPhotos: async (id: string) => {
+        let response = await request(`/albums/${id}/photos`)
+        return response.data;
     }
 }
