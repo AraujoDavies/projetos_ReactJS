@@ -1,6 +1,7 @@
+// Primeira página, lista albums.
 import { useEffect, useState } from "react";
-import { AlbumList } from "../components/albumList";
 import { Api } from "../Api";
+import { AlbumList } from "../components/albumList";
 import { AlbumT } from "../types/album";
 
 export const AlbumPage = () => {

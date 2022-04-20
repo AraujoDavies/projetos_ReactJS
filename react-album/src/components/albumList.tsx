@@ -1,3 +1,4 @@
+//nome dos albuns com borda em volta
 import { Link } from 'react-router-dom';
 
 // Recebe ID do album e o título via PROPS
