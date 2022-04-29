@@ -9,16 +9,20 @@ import { AlbumT } from "../types/album";
 import { PhotoThumb } from '../components/photoThumb';
 import { BtnVoltar } from '../components/voltar';
 import { H2daSection } from '../components/titulo';
+import { LoadPage } from '../components/loading';
 
 export const Photos = () => {
     const params = useParams(); // parametros da URL
     const [photos, setPhotos] = useState<PhotoT[]>([]); // armazena as fotos
     const [albumName, setAlbumName] = useState<AlbumT>({userId: 0, id: 0, title:''}); //armazena o album
+    const[loading, setLoading] = useState(false)
 
     //reqs
     const LoadPhotos = async () => {
+        setLoading(true);
         let json = (params.id) ? await Api.getAllPhotos(params.id) : console.log('LoadPhotos error in req');
         setPhotos(json);
+        setLoading(false);
     };
     const LoadAlbum = async () => {
         let name = (params.id) ? await Api.getAlbum(params.id) : console.log('LoadAlbumName error in req');
@@ -31,6 +35,11 @@ export const Photos = () => {
     },[])
     return(
         <>
+        {loading &&
+            <LoadPage />
+        }
+        {!loading &&
+        <>
             <BtnVoltar /> 
             <H2daSection title={albumName?.title} />
             <div className="grid grid-cols-7 gap-4">
@@ -41,7 +50,8 @@ export const Photos = () => {
                 ))
                 }
             </div>
-            
+        </>
+        }         
         </>
     );
 }
